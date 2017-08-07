@@ -13,10 +13,37 @@ module Doll
       @not_found = block if block_given?
     end
 
+    def match(rule, options = {})
+      @routes.push(Match.new(rule, to: options[:to]))
+    end
+
+    # TODO: Add user session support
     def dispatch(event, adapter)
-      # TODO: Support for not found
-      reply = Message::Text.new(@not_found.call)
+      selected = @routes.each do |route|
+        break route if route.match?(event.body.text)
+      end
+      reply = unless selected.is_a?(Array)
+                selected.dialog.new(event, adapter).process
+              else
+                Message::Text.new(@not_found.call)
+              end
       Doll.config.adapters[adapter].reply(event, reply)
+    end
+
+    # :nodoc:
+    class Match
+      def initialize(rule, to:)
+        @rule = rule
+        @to = to.to_s
+      end
+
+      def match?(input)
+        @rule.match?(input)
+      end
+
+      def dialog
+        Kernel.const_get("#{@to.capitalize}::StartDialog")
+      end
     end
   end
 end

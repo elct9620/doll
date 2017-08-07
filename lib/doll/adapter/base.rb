@@ -14,12 +14,7 @@ module Doll
         # TODO: Specify Error code when verify failed
         return Response.error(0, 'Failed') unless verify_signature(request)
         body = request.body.read
-        # TODO: Add support for job scheduler
-        # TODO: Handle thread errors
-        Thread.abort_on_exception = true
-        process(body).each do
-          Thread.new { Doll.dispatch(event, name) }
-        end
+        dispatch(process(body))
         Response.ok
       end
 
@@ -45,6 +40,9 @@ module Doll
       private
 
       def dispatch(events)
+        # TODO: Add support for job scheduler
+        # TODO: Handle thread errors
+        Thread.abort_on_exception = true
         events.each do |event|
           Thread.new { Doll.dispatch(event, name) }
         end
