@@ -14,13 +14,16 @@ module Doll
 
       def process(body)
         parsed_body = JSON.parse(body, symbolize_names: true)
-        entry = parsed_body[:entry].first
-        message = entry[:messaging].first
-        Event::Message.new(
-          # TODO: Implement Sender
-          message[:sender][:id],
-          Message::Text.new(message[:message][:text])
-        )
+        # TODO: Improve parser
+        parsed_body[:entry].map do |entry|
+          entry[:messaging].map do |message|
+            next if message.fetch(:message, {}).fetch(:text).nil?
+            Event::Message.new(
+              message[:sender][:id],
+              Message::Text.new(message[:message][:text])
+            )
+          end
+        end.flatten.compact
       end
 
       def verify_token(request)

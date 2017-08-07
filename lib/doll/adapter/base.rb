@@ -17,7 +17,9 @@ module Doll
         # TODO: Add support for job scheduler
         # TODO: Handle thread errors
         Thread.abort_on_exception = true
-        Thread.new { Doll.dispatch(process(body), name) }
+        process(body).each do
+          Thread.new { Doll.dispatch(event, name) }
+        end
         Response.ok
       end
 
@@ -38,6 +40,14 @@ module Doll
       def reply(_event, _message)
         raise NotImplementedError,
               "Adapter's reply method should be implemented"
+      end
+
+      private
+
+      def dispatch(events)
+        events.each do |event|
+          Thread.new { Doll.dispatch(event, name) }
+        end
       end
     end
   end
