@@ -17,10 +17,15 @@ module Doll
       @routes.push(Match.new(rule, to: options[:to]))
     end
 
+    def intent(name)
+      @routes.push(Intent.new(name))
+    end
+
     # TODO: Add user session support
     def dispatch(params, adapter)
+      # TODO: Add priority support
       selected = @routes.each do |route|
-        break route if route.match?(params[:text])
+        break route if route.match?(params)
       end
       reply = unless selected.is_a?(Array)
                 selected.dialog.new(params, adapter).process
@@ -37,12 +42,27 @@ module Doll
         @to = to.to_s
       end
 
-      def match?(input)
-        @rule.match?(input)
+      def match?(params)
+        @rule.match?(params[:text])
       end
 
       def dialog
         Kernel.const_get("#{@to.capitalize}::StartDialog")
+      end
+    end
+
+    # :nodoc:
+    class Intent
+      def initialize(intent)
+        @intent = intent.to_s
+      end
+
+      def match?(params)
+        @intent == params[:intent]
+      end
+
+      def dialog
+        Kernel.const_get("#{@intent.capitalize}::StartDialog")
       end
     end
   end

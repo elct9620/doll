@@ -18,6 +18,8 @@ require 'doll/adapter/base'
 require 'doll/adapter/plain'
 require 'doll/adapter/facebook'
 
+require 'doll/nlp/wit'
+
 require 'doll/event/message'
 
 require 'doll/message/text'

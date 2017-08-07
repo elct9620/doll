@@ -3,7 +3,7 @@
 module Doll
   # Chatbot Configuration
   class Config
-    attr_reader :adapters
+    attr_reader :adapters, :middlewares
 
     def initialize
       @adapters = {}

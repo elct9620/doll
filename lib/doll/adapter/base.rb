@@ -44,6 +44,10 @@ module Doll
         # TODO: Handle thread errors
         Thread.abort_on_exception = true
         events.each do |event|
+          # TODO: Improve apply middleware
+          event = Doll.config
+                      .middlewares
+                      .reduce(event) { |p, fn| fn.call(p) }
           Thread.new { Doll.dispatch(event, name) }
         end
       end
