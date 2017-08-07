@@ -50,13 +50,26 @@ end
 Configure your chatbot converse rules (`converse.rb`)
 ```ruby
 Doll.converse do
-  # TODO: Keyword matcher is comming soon...
+  match /[Hh]ello/, to: :hello
+
   not_found { 'I cannot figure out what you say....' }
 end
 ```
 
 Create your dialog classes
-TODO: Add support for dialog
+```ruby
+# TODO: Namespace and Class name can improved more
+
+module Hello
+  # Initialize Dialog
+  class StartDialog
+    def process
+      # TODO: View-like helper comming soon
+      Doll::Message::Text.new('Hi, Human!')
+    end
+  end
+end
+```
 
 Start your server
 ```bash
