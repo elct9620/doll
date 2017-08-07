@@ -44,6 +44,9 @@ Doll.configure do
     'SECRET_TOKEN',
     'VERIFY_TOKEN'
   )
+
+  # NLP Support
+  use Doll::NLP::Wit.new('API_TOKEN')
 end
 ```
 
@@ -51,6 +54,8 @@ Configure your chatbot converse rules (`converse.rb`)
 ```ruby
 Doll.converse do
   match /[Hh]ello/, to: :hello
+  # Current only support `intent` as predict entity for Wit.ai
+  intent :buy
 
   not_found { 'I cannot figure out what you say....' }
 end
@@ -58,7 +63,7 @@ end
 
 Create your dialog classes
 ```ruby
-# TODO: Namespace and Class name can improved more
+# TODO: Namespace and Class name can be improved
 
 module Hello
   # Initialize Dialog
@@ -66,6 +71,20 @@ module Hello
     def process
       # TODO: View-like helper comming soon
       Doll::Message::Text.new('Hi, Human!')
+    end
+  end
+end
+```
+
+```ruby
+# TODO: Namespace and Class name can be improved
+
+module Buy
+  # Initialize Dialog
+  class StartDialog
+    def process
+      # TODO: View-like helper comming soon
+      Doll::Message::Text.new('Ok, I know you want buy something')
     end
   end
 end
