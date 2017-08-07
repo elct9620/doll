@@ -12,6 +12,15 @@ module Doll
         new(status, error: { code: code, message: reason }).finish
       end
 
+      # TODO: Provide Doll::Response support this mode
+      def plain(body, status = 200)
+        res = Rack::Response.new
+        res.headers['Content-Type'] = 'text/plain'
+        res.status = status
+        res.body = [body]
+        res.finish
+      end
+
       def not_found(reason)
         new(404, error: { message: reason })
       end

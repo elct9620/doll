@@ -12,7 +12,7 @@ module Doll
 
       def handle(request)
         # TODO: Specify Error code when verify failed
-        return Response.error(0, 'Verify failed') unless verify(request)
+        return Response.error(0, 'Failed') unless verify_signature(request)
         body = request.body.read
         # TODO: Add support for job scheduler
         # TODO: Handle thread errors
@@ -26,9 +26,13 @@ module Doll
               "Adapter's process method should be implemented"
       end
 
-      def verify(_request)
+      def verify_token(_request)
+        Response.ok
+      end
+
+      def verify_signature(_request)
         raise NotImplementedError,
-              "Adapter's verify method should be implemented"
+              "Adapter's verify_signature method should be implemented"
       end
 
       def reply(_event, _message)

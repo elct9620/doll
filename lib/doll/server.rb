@@ -25,7 +25,9 @@ module Doll
 
     def call(env)
       request = Request.new(env)
-      return handle_by_chatbot(request) if request.post?
+      res = handle_by_chatbot(request)
+      return res unless res.nil?
+      # TODO: More Doll information
       Response.api_status
     end
 
@@ -34,7 +36,12 @@ module Doll
     def handle_by_chatbot(request)
       # TODO: Improve error handler
       return Response.not_found('Adapter not found.') unless request.support?
+      return verify_token(request) if request.get?
       Doll.config.adapters[request.adapter].handle(request)
+    end
+
+    def verify_token(request)
+      Doll.config.adapters[request.adapter].verify_token(request)
     end
   end
 end

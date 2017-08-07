@@ -2,6 +2,8 @@
 
 require 'rack'
 require 'json'
+require 'openssl'
+require 'net/http'
 
 require 'doll/version'
 require 'doll/config'
@@ -13,6 +15,7 @@ require 'doll/dialog'
 
 require 'doll/adapter/base'
 require 'doll/adapter/plain'
+require 'doll/adapter/facebook'
 
 require 'doll/event/message'
 

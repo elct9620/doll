@@ -10,11 +10,12 @@ module Doll
 
       def process(body)
         Event::Message.new(
+          'Unknown',
           Message::Text.new(body)
         )
       end
 
-      def verify(_request)
+      def verify_signature(_request)
         true
       end
 
