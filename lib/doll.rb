@@ -12,6 +12,7 @@ require 'doll/request'
 require 'doll/response'
 require 'doll/converse'
 require 'doll/dialog'
+require 'doll/parameter'
 
 require 'doll/adapter/base'
 require 'doll/adapter/plain'

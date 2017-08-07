@@ -5,7 +5,7 @@ module Doll
   class Dialog
     def initialize(context, adapter)
       # TODO: Use parameter class
-      @params = {}
+      @params = context
       @params[:adapter] = adapter
 
       setup(context)
@@ -21,7 +21,7 @@ module Doll
 
     def setup(context)
       # TODO: Support all types event
-      @params[:text] = context.body.text
+      # @params[:text] = context.body.text
     end
   end
 end

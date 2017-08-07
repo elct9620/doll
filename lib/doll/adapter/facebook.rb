@@ -18,10 +18,8 @@ module Doll
         parsed_body[:entry].map do |entry|
           entry[:messaging].map do |message|
             next if message.fetch(:message, {}).fetch(:text).nil?
-            Event::Message.new(
-              message[:sender][:id],
-              Message::Text.new(message[:message][:text])
-            )
+            # TODO: Build parameter or event
+            build_parameter(message)
           end
         end.flatten.compact
       end
@@ -39,15 +37,24 @@ module Doll
         Rack::Utils.secure_compare(signature, signature_for(body))
       end
 
-      def reply(event, message)
+      def reply(params, message)
         # TODO: Deal with send error
         send(
-          recipient: { id: event.user_id },
+          recipient: { id: params[:recipient][:id] },
           message: { text: message.text }
         )
       end
 
       protected
+
+      def build_parameter(message)
+        Parameter[
+          recipient: {
+            id: message[:sender][:id]
+          },
+          text: message[:message][:text]
+        ]
+      end
 
       def signature_for(string)
         format('sha1=%s'.freeze, generate_hmac(string))

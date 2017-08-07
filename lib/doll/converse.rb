@@ -18,16 +18,16 @@ module Doll
     end
 
     # TODO: Add user session support
-    def dispatch(event, adapter)
+    def dispatch(params, adapter)
       selected = @routes.each do |route|
-        break route if route.match?(event.body.text)
+        break route if route.match?(params[:text])
       end
       reply = unless selected.is_a?(Array)
-                selected.dialog.new(event, adapter).process
+                selected.dialog.new(params, adapter).process
               else
                 Message::Text.new(@not_found.call)
               end
-      Doll.config.adapters[adapter].reply(event, reply)
+      Doll.config.adapters[adapter].reply(params, reply)
     end
 
     # :nodoc:
