@@ -18,11 +18,11 @@ Or install it yourself as:
 
     $ gem install doll
 
+# Requirement
+
+* Ruby 2.3+
+
 ## Usage
-
-Requirement:
-
-* puma
 
 Prepare your Rack (`config.ru`)
 ```ruby
@@ -96,6 +96,38 @@ $ puma -C config.ru
 ```
 
 Now, you can access your chatbot via `https://example.com/facebook`
+
+### Rails Integrate
+
+Mount doll routes
+```ruby
+mount Doll.server => '/doll'
+```
+
+Add configuration and converse to `config/initializes/doll.rb`
+```ruby
+Doll.configurate do
+  adapter # ...
+end
+
+Doll.converse do
+  match # ...
+  intent # ...
+end
+```
+
+Add dialog classes into `app/bot`
+
+```ruby
+# app/bot/hello/start_dialog.rb
+
+module Hello
+  class StartDialog < Doll::Dialog
+    def process
+      # ...
+    end
+  end
+end
 
 ## Development
 
