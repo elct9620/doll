@@ -138,6 +138,11 @@ end
   * [x] NLP intent
   * [ ] Routing options
   * [ ] Improved routing
+* [ ] Session
+  * [ ] Store
+    * [ ] Memory-based
+    * [ ] Redis
+  * [ ] Converse Management
 * [ ] Dialog
   * [ ] Response Builder
   * [ ] Parameter
