@@ -130,6 +130,29 @@ module Hello
 end
 ```
 
+## Roadmap
+
+* [x] Workable Chatbot
+* [ ] Converse
+  * [x] Regexp Matcher
+  * [x] NLP intent
+  * [ ] Routing options
+  * [ ] Improved routing
+* [ ] Dialog
+  * [ ] View
+  * [ ] Parameter
+* [ ] Adaptetr
+  * [ ] Facebook
+    * [x] Text Message
+    * [ ] Image Message
+  * [ ] LINE
+    * [ ] Text Message
+    * [ ] Image Message
+* [ ] Middleware
+  * [ ] NLP
+    * [ ] Wit.ai
+    * [ ] LUIS.ai
+
 ## Development
 
 TODO: Write development guide
