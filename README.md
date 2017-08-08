@@ -128,6 +128,7 @@ module Hello
     end
   end
 end
+```
 
 ## Development
 
