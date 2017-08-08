@@ -139,7 +139,7 @@ end
   * [ ] Routing options
   * [ ] Improved routing
 * [ ] Dialog
-  * [ ] View
+  * [ ] Response Builder
   * [ ] Parameter
 * [ ] Adaptetr
   * [ ] Facebook
