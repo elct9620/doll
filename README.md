@@ -155,7 +155,7 @@ end
     * [ ] Image Message
 * [ ] Middleware
   * [ ] NLP
-    * [ ] Wit.ai
+    * [x] Wit.ai
     * [ ] LUIS.ai
 
 ## Development

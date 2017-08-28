@@ -22,7 +22,7 @@ module Doll
       end
 
       def not_found(reason)
-        new(404, error: { message: reason })
+        new(404, error: { message: reason }).finish
       end
 
       def api_status
