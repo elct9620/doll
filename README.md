@@ -1,4 +1,5 @@
-# Doll
+Doll [![Gem Version](https://badge.fury.io/rb/doll.svg)](https://badge.fury.io/rb/doll) [![Build Status](https://travis-ci.org/elct9620/doll.svg?branch=master)](https://travis-ci.org/elct9620/doll) [![Coverage Status](https://coveralls.io/repos/github/elct9620/doll/badge.svg?branch=master)](https://coveralls.io/github/elct9620/doll?branch=master) [![Code Climate](https://codeclimate.com/github/elct9620/doll/badges/gpa.svg)](https://codeclimate.com/github/elct9620/doll)
+===
 
 The Chatbot Framework written in Ruby
 
