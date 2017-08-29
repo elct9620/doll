@@ -2,7 +2,6 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
 require 'simplecov'
 require 'coveralls'
-require 'codeclimate-test-reporter'
 
 SimpleCov.start do
   formatter SimpleCov::Formatter::MultiFormatter.new(
